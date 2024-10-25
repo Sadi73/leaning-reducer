@@ -1,15 +1,13 @@
-import Header from "./Components/Header"
 import MainContainer from "./Components/MainContainer"
-import Sidebar from "./Components/Sidebar"
+import SidebarContainer from "./Components/SidebarContainer"
 
 function App() {
 
   return (
-    <>
-      <Header />
-      <Sidebar />
+    <div className="flex h-screen">
+      <SidebarContainer />
       <MainContainer />
-    </>
+    </div>
   )
 }
 
