@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Header from './Header';
 import addIcon from '../assets/addIcon.svg';
 import CardContainer from './CardContainer';
+import { DataContext } from '../App';
 
 const MainContainer = () => {
+
+    const { allProjects } = useContext(DataContext);
+
     return (
         <main className="flex-1 overflow-y-auto overflow-x-hidden">
 
             <Header />
 
 
-            <div className="mx-auto max-w-7xl p-6 bg-black">
+            <div className="mx-auto max-w-7xl p-6 bg-black min-h-screen">
                 <div className="mb-6 flex items-center justify-between">
                     <h2 className="text-2xl font-bold text-white">Projectify</h2>
                     <div className="flex space-x-2">
@@ -23,7 +27,9 @@ const MainContainer = () => {
                     </div>
                 </div>
 
-                <CardContainer />
+                {Object.entries(allProjects)?.length > 0 ? <CardContainer /> : <p className='text-white text-center font-bold'>No Data Available</p>}
+
+
             </div>
         </main>
     );

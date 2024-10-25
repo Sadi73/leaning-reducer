@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
-import { dummyData } from '../../public/data';
 import CategoryContainer from './CategoryContainer';
+import { DataContext } from '../App';
 
 const CardContainer = () => {
-    const allProjects = dummyData;
+    const {allProjects} = useContext(DataContext);
 
     return (
         <div className="-mx-2 mb-6 flex flex-wrap">
