@@ -7,7 +7,13 @@ export const DataContext = createContext({});
 
 function App() {
 
-  const [allProjects, setAllProjects] = useState({...dummyData})
+  const [allProjects, setAllProjects] = useState({
+    'To-Do': [],
+    'On Progress': [],
+    'Done': [],
+    'Revise': [],
+
+  })
 
 
   return (
