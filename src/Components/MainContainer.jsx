@@ -8,13 +8,26 @@ import ButtonContainer from './ButtonContainer';
 const MainContainer = () => {
 
     const [addTaskModalVisible, setAddTaskModalVisible] = useState(false);
+    const [editItem, setEditItem] = useState(null);
 
     const { allProjects } = useContext(DataContext);
+
+    const handleClickEdit = (item) => {
+        setEditItem(item)
+        setAddTaskModalVisible(true);
+    }
 
     return (
         <main className="flex-1 overflow-y-auto overflow-x-hidden">
 
-            {addTaskModalVisible && <AddTaskModal onClose={() => setAddTaskModalVisible(false)} />}
+            {addTaskModalVisible &&
+                <AddTaskModal
+                    onClose={() => {
+                        setEditItem(null);
+                        setAddTaskModalVisible(false);
+                    }}
+                    itemToEdit={editItem}
+                />}
 
             <Header />
 
@@ -23,7 +36,10 @@ const MainContainer = () => {
                     setAddTaskModalVisible={setAddTaskModalVisible}
                 />
 
-                {Object.entries(allProjects)?.length > 0 ? <CardContainer /> : <p className='text-white text-center font-bold'>No Data Available</p>}
+                {Object.entries(allProjects)?.length > 0 ?
+                    <CardContainer
+                        handleClickEdit={handleClickEdit}
+                    /> : <p className='text-white text-center font-bold'>No Data Available</p>}
 
 
             </div>

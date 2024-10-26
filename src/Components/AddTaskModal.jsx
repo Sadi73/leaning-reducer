@@ -1,11 +1,11 @@
 import React, { useContext, useState } from 'react';
 import { DataContext } from '../App';
 
-const AddTaskModal = ({ onClose }) => {
+const AddTaskModal = ({ onClose, itemToEdit }) => {
 
     const { setAllProjects } = useContext(DataContext);
 
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState(itemToEdit ? { ...itemToEdit } : {
         title: '',
         description: '',
         date: '',
@@ -17,17 +17,45 @@ const AddTaskModal = ({ onClose }) => {
             ...formData,
             [e.target.name]: e.target.value
         });
-    }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        setAllProjects(prevProjects => ({
-            ...prevProjects,
-            [formData.category]: [
-                ...prevProjects[formData.category],
-                { ...formData, id: crypto.randomUUID() }
-            ]
-        }));
+
+        if (itemToEdit) {
+            // Check if category has changed
+            if (itemToEdit.category === formData.category) {
+                // If the category is the same, just update the item
+                setAllProjects(prevProjects => ({
+                    ...prevProjects,
+                    [formData.category]: prevProjects[formData.category].map(item =>
+                        item?.id === formData?.id ? formData : item
+                    )
+                }));
+            } else {
+                // If the category has changed, remove from the old category and add to the new one
+                setAllProjects(prevProjects => ({
+                    ...prevProjects,
+                    // Remove from the old category
+                    [itemToEdit.category]: prevProjects[itemToEdit.category].filter(item => item.id !== formData.id),
+                    // Add to the new category
+                    [formData.category]: [
+                        ...prevProjects[formData.category],
+                        formData
+                    ]
+                }));
+            }
+        } else {
+            // Add new item if not editing
+            setAllProjects(prevProjects => ({
+                ...prevProjects,
+                [formData.category]: [
+                    ...prevProjects[formData.category],
+                    { ...formData, id: crypto.randomUUID() }
+                ]
+            }));
+        }
+
         onClose();
     };
 
@@ -101,7 +129,7 @@ const AddTaskModal = ({ onClose }) => {
                                 <option value="To-Do">To-Do</option>
                                 <option value="On Progress">On Progress</option>
                                 <option value="Done">Done</option>
-                                <option value="Revised">Revised</option>
+                                <option value="Revise">Revised</option>
                             </select>
                         </div>
 

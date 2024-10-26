@@ -1,7 +1,7 @@
 import { createContext, useState } from "react";
-import { dummyData } from "../public/data"
 import MainContainer from "./Components/MainContainer"
 import SidebarContainer from "./Components/SidebarContainer"
+import { dummyData } from "../public/data";
 
 export const DataContext = createContext({});
 
@@ -14,6 +14,7 @@ function App() {
     'Revise': [],
 
   })
+  // const [allProjects, setAllProjects] = useState({...dummyData})
 
 
   return (

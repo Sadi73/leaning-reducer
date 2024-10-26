@@ -3,8 +3,8 @@ import deleteIcon from '../assets/deleteIcon.svg';
 import editIcon from '../assets/editIcon.svg';
 import { chooseColor } from '../utills/Essentials';
 
-const Card = ({ cardItem }) => {
-    
+const Card = ({ cardItem, handleClickEdit }) => {
+
     return (
         <div className="mb-4 rounded-lg bg-gray-800 p-4">
             <div className="flex justify-between">
@@ -14,7 +14,7 @@ const Card = ({ cardItem }) => {
 
                 <div className="flex gap-2">
                     <img src={deleteIcon} className='h-4' />
-                    <img src={editIcon} className='h-4' />
+                    <img src={editIcon} className='h-4' onClick={() => handleClickEdit(cardItem)} />
 
                 </div>
             </div>
