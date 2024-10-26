@@ -1,11 +1,15 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
+import { DataContext } from '../App';
 
 const AddTaskModal = ({ onClose }) => {
+
+    const { setAllProjects } = useContext(DataContext);
+
     const [formData, setFormData] = useState({
         title: '',
         description: '',
         date: '',
-        category: ''
+        category: 'To-Do'
     });
 
     const handleChange = (e) => {
@@ -17,10 +21,15 @@ const AddTaskModal = ({ onClose }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(formData);
+        setAllProjects(prevProjects => ({
+            ...prevProjects,
+            [formData.category]: [
+                ...prevProjects[formData.category],
+                { ...formData, id: crypto.randomUUID() }
+            ]
+        }));
+        onClose();
     };
-
-    console.log(formData)
 
     return (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-85 w-full">
@@ -40,6 +49,7 @@ const AddTaskModal = ({ onClose }) => {
                                 required
                                 className="w-full rounded-md border border-gray-600 bg-gray-700 px-3 py-2 text-white placeholder-gray-400 shadow-sm focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500"
                                 onChange={(e) => handleChange(e)}
+                                value={formData?.title}
                             />
                         </div>
 
@@ -52,8 +62,10 @@ const AddTaskModal = ({ onClose }) => {
                                 id="description"
                                 name="description"
                                 rows="3"
+                                required
                                 className="w-full rounded-md border border-gray-600 bg-gray-700 px-3 py-2 text-white placeholder-gray-400 shadow-sm focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500"
                                 onChange={(e) => handleChange(e)}
+                                value={formData?.description}
                             ></textarea>
                         </div>
 
@@ -66,8 +78,10 @@ const AddTaskModal = ({ onClose }) => {
                                 type="date"
                                 id="dueDate"
                                 name="date"
+                                required
                                 className="w-full rounded-md border border-gray-600 bg-gray-700 px-3 py-2 text-white shadow-sm focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500"
                                 onChange={(e) => handleChange(e)}
+                                value={formData?.date}
                             />
                         </div>
 
@@ -79,13 +93,15 @@ const AddTaskModal = ({ onClose }) => {
                             <select
                                 id="category"
                                 name="category"
+                                required
                                 className="w-full rounded-md border border-gray-600 bg-gray-700 px-3 py-2 text-white shadow-sm focus:border-green-500 focus:outline-none focus:ring-2 focus:ring-green-500"
                                 onChange={(e) => handleChange(e)}
+                                value={formData?.category}
                             >
-                                <option value="todo">To-Do</option>
-                                <option value="inprogress">On Progress</option>
-                                <option value="done">Done</option>
-                                <option value="revised">Revised</option>
+                                <option value="To-Do">To-Do</option>
+                                <option value="On Progress">On Progress</option>
+                                <option value="Done">Done</option>
+                                <option value="Revised">Revised</option>
                             </select>
                         </div>
 
