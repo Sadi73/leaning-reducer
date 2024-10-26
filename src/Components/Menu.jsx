@@ -1,6 +1,5 @@
 import React from 'react';
 import MenuItem from './MenuItem';
-
 import dashboardIcon from '../assets/dashboardIcon.svg';
 import projectIcon from '../assets/projectIcon.svg';
 import contactIcon from '../assets/contactIcon.svg';

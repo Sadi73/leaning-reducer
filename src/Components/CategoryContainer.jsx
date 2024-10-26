@@ -3,7 +3,6 @@ import filterIcon from '../assets/filterIcon.svg';
 import Card from './Card';
 import { chooseColor } from '../utills/Essentials';
 
-
 const CategoryContainer = ({ title, data }) => {
 
     return (
@@ -15,12 +14,14 @@ const CategoryContainer = ({ title, data }) => {
                 </div>
 
                 <div>
-                    {data.map(item =>
+                    {data?.length > 0 ? data.map(item =>
                         <Card key={item?.id} cardItem={item} />
-                    )}
+                    ) :
+                        <div className="mb-4 rounded-lg bg-gray-800 p-4">
+                            <p className='text-white text-center font-bold'>No Item Found</p>
+                        </div>
+                    }
                 </div>
-
-
             </div>
         </div>
     );
