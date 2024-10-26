@@ -1,18 +1,22 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import Header from './Header';
 import addIcon from '../assets/addIcon.svg';
 import CardContainer from './CardContainer';
 import { DataContext } from '../App';
+import AddTaskModal from './AddTaskModal';
 
 const MainContainer = () => {
+
+    const [addTaskModalVisible, setAddTaskModalVisible] = useState(false);
 
     const { allProjects } = useContext(DataContext);
 
     return (
         <main className="flex-1 overflow-y-auto overflow-x-hidden">
 
-            <Header />
+            {addTaskModalVisible && <AddTaskModal onClose={() => setAddTaskModalVisible(false)} />}
 
+            <Header />
 
             <div className="mx-auto max-w-7xl p-6 bg-black min-h-screen">
                 <div className="mb-6 flex items-center justify-between">
@@ -20,6 +24,7 @@ const MainContainer = () => {
                     <div className="flex space-x-2">
                         <button
                             className="flex items-center rounded-md bg-gray-700 px-4 py-2 text-white"
+                            onClick={() => setAddTaskModalVisible(true)}
                         >
                             <img src={addIcon} className='h-6 mr-2' />
                             Add
