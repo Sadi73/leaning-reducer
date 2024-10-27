@@ -1,7 +1,6 @@
 import { createContext, useState } from "react";
 import MainContainer from "./Components/MainContainer"
 import SidebarContainer from "./Components/SidebarContainer"
-import { dummyData } from "../public/data";
 
 export const DataContext = createContext({});
 
@@ -13,9 +12,7 @@ function App() {
     'Done': [],
     'Revise': [],
 
-  })
-  // const [allProjects, setAllProjects] = useState({...dummyData})
-
+  });
 
   return (
     <DataContext.Provider value={{ allProjects, setAllProjects }}>
