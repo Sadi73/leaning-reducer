@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import CategoryContainer from './CategoryContainer';
 import { DataContext } from '../App';
 
-const CardContainer = ({ handleClickEdit }) => {
+const CardContainer = ({ handleClickEdit , handleDelete}) => {
     const { allProjects } = useContext(DataContext);
 
     return (
@@ -14,6 +14,8 @@ const CardContainer = ({ handleClickEdit }) => {
                     title={title}
                     data={data}
                     handleClickEdit={handleClickEdit}
+                    handleDelete={handleDelete}
+                    
                 />
             )}
         </div>

@@ -3,7 +3,7 @@ import deleteIcon from '../assets/deleteIcon.svg';
 import editIcon from '../assets/editIcon.svg';
 import { chooseColor } from '../utills/Essentials';
 
-const Card = ({ cardItem, handleClickEdit }) => {
+const Card = ({ cardItem, handleClickEdit, handleDelete }) => {
 
     return (
         <div className="mb-4 rounded-lg bg-gray-800 p-4">
@@ -13,7 +13,7 @@ const Card = ({ cardItem, handleClickEdit }) => {
                 </h4>
 
                 <div className="flex gap-2">
-                    <img src={deleteIcon} className='h-4' />
+                    <img src={deleteIcon} className='h-4' onClick={() => handleDelete(cardItem?.id, cardItem?.category)} />
                     <img src={editIcon} className='h-4' onClick={() => handleClickEdit(cardItem)} />
 
                 </div>

@@ -3,7 +3,7 @@ import filterIcon from '../assets/filterIcon.svg';
 import Card from './Card';
 import { chooseColor } from '../utills/Essentials';
 
-const CategoryContainer = ({ title, data, handleClickEdit }) => {
+const CategoryContainer = ({ title, data, handleClickEdit, handleDelete }) => {
 
     return (
         <div className="mb-4 w-full px-2 sm:w-1/2 md:w-1/4">
@@ -19,6 +19,7 @@ const CategoryContainer = ({ title, data, handleClickEdit }) => {
                             key={item?.id}
                             cardItem={item}
                             handleClickEdit={handleClickEdit}
+                            handleDelete={handleDelete}
                         />
                     ) :
                         <div className="mb-4 rounded-lg bg-gray-800 p-4">

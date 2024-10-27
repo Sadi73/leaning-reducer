@@ -10,12 +10,19 @@ const MainContainer = () => {
     const [addTaskModalVisible, setAddTaskModalVisible] = useState(false);
     const [editItem, setEditItem] = useState(null);
 
-    const { allProjects } = useContext(DataContext);
+    const { allProjects, setAllProjects } = useContext(DataContext);
 
     const handleClickEdit = (item) => {
         setEditItem(item)
         setAddTaskModalVisible(true);
-    }
+    };
+
+    const handleDelete = (itemId, category) => {
+        setAllProjects(previousValue => ({
+            ...previousValue,
+            [category]: previousValue[category].filter(item => item?.id !== itemId)
+        }))
+    };
 
     return (
         <main className="flex-1 overflow-y-auto overflow-x-hidden">
@@ -39,6 +46,7 @@ const MainContainer = () => {
                 {Object.entries(allProjects)?.length > 0 ?
                     <CardContainer
                         handleClickEdit={handleClickEdit}
+                        handleDelete={handleDelete}
                     /> : <p className='text-white text-center font-bold'>No Data Available</p>}
 
 
